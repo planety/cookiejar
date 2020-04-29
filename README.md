@@ -1,4 +1,4 @@
-# cookies
+# cookiejar
 HTTP Cookies for Nim.
 This module provides the `Cookie` type, which directly maps to Set-Cookie HTTP response headers, and the `CookieJar` type which contains many cookies.
 

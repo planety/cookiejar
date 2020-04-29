@@ -10,7 +10,7 @@ discard """
 import options
 import strformat
 import times
-import cookies
+import cookiejar
 
 
 # forwards can work

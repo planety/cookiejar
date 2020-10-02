@@ -35,10 +35,12 @@ type
   MissingValueError* = object of ValueError ## Indicates an error associated with Cookie.
 
 
-proc initCookie*(name, value: string, expires = "", maxAge: Option[int] = none(int), 
-                 domain = "", path = "",
-                 secure = false, httpOnly = false, sameSite = Lax): Cookie {.inline.} =
-  ## Initiates Cookie object.
+func initCookie*(
+  name, value: string, expires = "", maxAge = none(int), 
+  domain = "", path = "", secure = false, 
+  httpOnly = false, sameSite = Lax
+): Cookie {.inline.} =
+  ## Initiates a `Cookie` object.
   runnableExamples:
     let
       username = "admin"
@@ -52,10 +54,12 @@ proc initCookie*(name, value: string, expires = "", maxAge: Option[int] = none(i
                   maxAge: maxAge, domain: domain, path: path,
                   secure: secure, httpOnly: httpOnly, sameSite: sameSite)
   
-proc initCookie*(name, value: string, expires: DateTime|Time, 
-                 maxAge: Option[int] = none(int), domain = "", path = "", secure = false, httpOnly = false,
-                 sameSite = Lax): Cookie {.inline.} =
-  ## Initiates Cookie object.
+func initCookie*(
+  name, value: string, expires: DateTime|Time, 
+  maxAge = none(int), domain = "", path = "", 
+  secure = false, httpOnly = false, sameSite = Lax
+): Cookie {.inline.} =
+  ## Initiates a `Cookie` object.
   runnableExamples:
     import times
 
@@ -73,7 +77,7 @@ proc initCookie*(name, value: string, expires: DateTime|Time,
                       "ddd',' dd MMM yyyy HH:mm:ss 'GMT'"), maxAge, domain, path, secure,
                       httpOnly, sameSite)
 
-proc parseParams(cookie: var Cookie, key: string, value: string) {.inline.} =
+func parseParams(cookie: var Cookie, key: string, value: string) =
   ## Parse Cookie attributes from key-value pairs.
   case key.toLowerAscii
   of "expires":
@@ -105,7 +109,7 @@ proc parseParams(cookie: var Cookie, key: string, value: string) {.inline.} =
   else:
     discard
 
-proc initCookie*(text: string): Cookie {.inline.} =
+func initCookie*(text: string): Cookie =
   ## Initiates Cookie object from strings.
   runnableExamples:
     doAssert initCookie("foo=bar=baz").name == "foo"
@@ -144,7 +148,7 @@ proc initCookie*(text: string): Cookie {.inline.} =
       break
     inc(pos) # skip ';
 
-proc setCookie*(cookie: Cookie): string =
+func setCookie*(cookie: Cookie): string =
   ## Stringifys Cookie object to get Set-Cookie HTTP response headers.
   runnableExamples:
     import strformat
@@ -173,7 +177,7 @@ proc setCookie*(cookie: Cookie): string =
   if cookie.sameSite != None:
     result.add("; SameSite=" & $cookie.sameSite)
 
-proc `$`*(cookie: Cookie): string {.inline.} = 
+func `$`*(cookie: Cookie): string {.inline.} = 
   ## Stringifys Cookie object to get Set-Cookie HTTP response headers.
   runnableExamples:
     import strformat
@@ -188,39 +192,39 @@ proc `$`*(cookie: Cookie): string {.inline.} =
 
   setCookie(cookie)
 
-proc initCookieJar*(): CookieJar {.inline.} =
+func initCookieJar*(): CookieJar {.inline.} =
   ## Creates a new cookieJar that is empty.
   CookieJar(data: newStringTable(mode = modeCaseSensitive))
 
-proc len*(cookieJar: CookieJar): int {.inline.} =
+func len*(cookieJar: CookieJar): int {.inline.} =
   ## Returns the number of names in ``cookieJar``.
   cookieJar.data.len
 
-proc `[]`*(cookieJar: CookieJar, name: string): string {.inline.} =
+func `[]`*(cookieJar: CookieJar, name: string): string {.inline.} =
   ## Retrieves the value at ``cookieJar[name]``.
   ##
   ## If ``name`` is not in ``cookieJar``, the ``KeyError`` exception is raised.
   cookieJar.data[name]
 
-proc getOrDefault*(cookieJar: CookieJar, name: string, default = ""): string {.inline.} =
+func getOrDefault*(cookieJar: CookieJar, name: string, default = ""): string {.inline.} =
   ## Retrieves the value at ``cookieJar[name]`` if ``name`` is in ``cookieJar``. Otherwise, the
   ## default value is returned(default is "").
   cookieJar.data.getOrDefault(name, default)
 
-proc hasKey*(cookieJar: CookieJar, name: string): bool {.inline.} =
+func hasKey*(cookieJar: CookieJar, name: string): bool {.inline.} =
   ## Returns true if ``name`` is in the ``cookieJar``.
   cookieJar.data.hasKey(name)
 
-proc contains*(cookieJar: CookieJar, name: string): bool {.inline.} =
+func contains*(cookieJar: CookieJar, name: string): bool {.inline.} =
   ## Returns true if ``name`` is in the ``cookieJar``.
   ## Alias of ``hasKey`` for use with the ``in`` operator.
   cookieJar.data.contains(name)
 
-proc `[]=`*(cookieJar: var CookieJar, name: string, value: string) {.inline.} =
+func `[]=`*(cookieJar: var CookieJar, name: string, value: string) {.inline.} =
   ## Inserts a ``(name, value)`` pair into ``cookieJar``.
   cookieJar.data[name] = value
 
-proc parse*(cookieJar: var CookieJar, text: string) {.inline.} =
+func parse*(cookieJar: var CookieJar, text: string) {.inline.} =
   ## Parses CookieJar from strings.
   runnableExamples:
     var cookieJar = initCookieJar()

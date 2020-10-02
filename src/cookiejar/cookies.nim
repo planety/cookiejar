@@ -53,8 +53,8 @@ func initCookie*(
   result = Cookie(name: name, value: value, expires: expires, 
                   maxAge: maxAge, domain: domain, path: path,
                   secure: secure, httpOnly: httpOnly, sameSite: sameSite)
-  
-func initCookie*(
+
+proc initCookie*(
   name, value: string, expires: DateTime|Time, 
   maxAge = none(int), domain = "", path = "", 
   secure = false, httpOnly = false, sameSite = Lax

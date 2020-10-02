@@ -10,7 +10,7 @@ discard """
 import options
 import strformat
 import times
-import cookiejar
+import ../src/cookiejar
 
 
 # forwards can work
@@ -18,6 +18,15 @@ block:
   discard secondsForward(0)
   discard daysForward(10)
   discard timesForward(1, 2, 3, 4, 5, 6, 7, 8)
+
+
+# InitCookie
+block:
+  let
+    username = "admin"
+    password = "root"
+
+  discard initCookie(username, password, now())
 
 # SetCookie
 block:

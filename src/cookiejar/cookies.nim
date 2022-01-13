@@ -83,7 +83,7 @@ func parseParams(cookie: var Cookie, key: string, value: string) =
   of "expires":
     if value.len != 0:
       cookie.expires = value
-  of "maxage":
+  of "max-age":
     try:
       cookie.maxAge = some(parseInt(value))
     except ValueError:

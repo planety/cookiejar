@@ -45,7 +45,7 @@ block:
     doAssert not cookie.secure
     doAssert not cookie.httpOnly
     doAssert cookie.samesite == Lax
-    doAssert setCookie(cookie) == fmt"{username}={password}; SameSite=Lax"
+    doAssert setCookie(cookie) == fmt"{username}={password}"
     doAssert $cookie == setCookie(cookie)
 
   # domain

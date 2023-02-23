@@ -7,7 +7,7 @@ discard """
 import options
 import strformat
 import times
-import ../src/cookiejar
+import cookiejar
 
 
 # forwards can work

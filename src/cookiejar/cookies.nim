@@ -162,7 +162,6 @@ func setCookie*(cookie: Cookie): string =
     doAssert setCookie(cookie) == fmt"{username}={message}; SameSite=Lax"
 
   result.add cookie.name & "=" & cookie.value
-  result.add("; SameSite=" & $cookie.sameSite)
   if cookie.domain.strip.len != 0:
     result.add("; Domain=" & cookie.domain)
   if cookie.path.strip.len != 0:

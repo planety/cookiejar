@@ -33,6 +33,8 @@ type
     data: StringTableRef
 
   MissingValueError* = object of ValueError ## Indicates an error associated with Cookie.
+  
+  InvalidSettingError* = object of ValueError ## Indicates an invalid combination of settings was attempted on a Cookie.
 
 
 func initCookie*(
@@ -176,6 +178,8 @@ func setCookie*(cookie: Cookie): string =
     result.add("; HttpOnly")
   if cookie.sameSite != Lax:
     result.add("; SameSite=" & $cookie.sameSite)
+    if cookie.sameSite == None and not cookie.secure:
+      raise InvalidSettingError.newException("The secure setting must be true if sameSite = None")
 
 func `$`*(cookie: Cookie): string {.inline.} = 
   ## Stringifys Cookie object to get Set-Cookie HTTP response headers.

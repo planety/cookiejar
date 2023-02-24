@@ -45,7 +45,7 @@ block:
     doAssert not cookie.secure
     doAssert not cookie.httpOnly
     doAssert cookie.samesite == Lax
-    doAssert setCookie(cookie) == fmt"{username}={password}; SameSite=Lax"
+    doAssert setCookie(cookie) == fmt"{username}={password}"
     doAssert $cookie == setCookie(cookie)
 
   # domain
@@ -63,7 +63,7 @@ block:
     doAssert not cookie.secure
     doAssert not cookie.httpOnly
     doAssert cookie.samesite == Lax
-    doAssert setCookie(cookie) == fmt"{username}={password}; Domain={cookie.domain}; SameSite=Lax"
+    doAssert setCookie(cookie) == fmt"{username}={password}; Domain={cookie.domain}"
     doAssert $cookie == setCookie(cookie)
 
   # path
@@ -81,7 +81,7 @@ block:
     doAssert not cookie.secure
     doAssert not cookie.httpOnly
     doAssert cookie.samesite == Lax
-    doAssert setCookie(cookie) == fmt"{username}={password}; Path={cookie.path}; SameSite=Lax"
+    doAssert setCookie(cookie) == fmt"{username}={password}; Path={cookie.path}"
     doAssert $cookie == setCookie(cookie)
 
   # maxAge
@@ -99,7 +99,7 @@ block:
     doAssert not cookie.secure
     doAssert not cookie.httpOnly
     doAssert cookie.samesite == Lax
-    doAssert setCookie(cookie) == fmt"{username}={password}; Max-Age={maxAge}; SameSite=Lax"
+    doAssert setCookie(cookie) == fmt"{username}={password}; Max-Age={maxAge}"
     doAssert $cookie == setCookie(cookie)
   
   # expires string
@@ -117,7 +117,7 @@ block:
     doAssert not cookie.secure
     doAssert not cookie.httpOnly
     doAssert cookie.samesite == Lax
-    doAssert setCookie(cookie) == fmt"{username}={password}; Expires={expires}; SameSite=Lax"
+    doAssert setCookie(cookie) == fmt"{username}={password}; Expires={expires}"
     doAssert $cookie == setCookie(cookie)
     
   # expires DateTime
@@ -136,7 +136,7 @@ block:
     doAssert not cookie.secure
     doAssert not cookie.httpOnly
     doAssert cookie.samesite == Lax
-    doAssert setCookie(cookie) == fmt"{username}={password}; Expires={expires}; SameSite=Lax"
+    doAssert setCookie(cookie) == fmt"{username}={password}; Expires={expires}"
     doAssert $cookie == setCookie(cookie)
 
   # secure
@@ -154,7 +154,7 @@ block:
     doAssert cookie.secure
     doAssert not cookie.httpOnly
     doAssert cookie.samesite == Lax
-    doAssert setCookie(cookie) == fmt"{username}={password}; Secure; SameSite=Lax"
+    doAssert setCookie(cookie) == fmt"{username}={password}; Secure"
     doAssert $cookie == setCookie(cookie)
 
   # http-only
@@ -172,7 +172,7 @@ block:
     doAssert not cookie.secure
     doAssert cookie.httpOnly
     doAssert cookie.samesite == Lax
-    doAssert setCookie(cookie) == fmt"{username}={password}; HttpOnly; SameSite=Lax"
+    doAssert setCookie(cookie) == fmt"{username}={password}; HttpOnly"
     doAssert $cookie == setCookie(cookie)
 
   # sameSite

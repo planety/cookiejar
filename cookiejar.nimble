@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.3.0"
+version       = "0.3.1"
 author        = "ringabout"
 description   = "HTTP Cookies for Nim."
 license       = "Apache-2.0"
